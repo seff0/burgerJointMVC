@@ -13,7 +13,56 @@
     {{{body}}}
 </body>
 <script type="text/javascript">
-    // button listeners will go here
+    document.addEventListener("DOMContentLoaded", (event) => {
+        if (event) {
+            console.info("DOM loaded")
+        }
+
+        const devourBtn = document.querySelectorAll(".devour")
+
+        if (devourBtn) {
+            devourBtn.forEach((button) => {
+                button.addEventListener("click", (event) => {
+                    const id = event.target.getAttribute("data-id")
+                    const devourStatus = event.target.getAttribute("data-devoured")
+
+                    const newDevouredState = { devoured: devourStatus, }
+
+                    fetch(`api/burgers/${id}`, {
+                        method: "PUT",
+
+                        body: JSON.stringify(devourStatus),
+                    }).then((response) => {
+                        if (response.ok) {
+                            location.reload("/")
+                        } else {
+                            alert("Something went wrong...")
+                        }
+                    })
+                })
+            })
+        }
+
+        const newBurgerBtn = document.getElementById("create-burger")
+
+        if (newBurgerBtn) {
+            newBurgerBtn.addEventListener("click", (event) => {
+
+                const newBurger = {
+                    name: document.getElementById("bur").value.trim(),
+                }
+
+                fetch(`api/burgers`, {
+                    method: "POST",
+
+                    body: JSON.stringify(newBurger),
+                }).then(() => {
+                    document.getElementById("bur").value = ""
+                    location.reload("/")
+                })
+            })
+        }
+    })
 </script>
 
 </html>
