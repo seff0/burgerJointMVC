@@ -1,15 +1,5 @@
 const connection = require("./connection.js");
 
-const printQuestionMarks = (num) => {
-  let arr = [];
-
-  for (let i = 0; i < num; i++) {
-    arr.push("?");
-  }
-
-  return arr.toString();
-};
-
 const orm = {
   selectAll(table, cb) {
     let query = `SELECT * FROM ${table}`;
@@ -22,11 +12,9 @@ const orm = {
   insertOne(table, cols, vals, cb) {
     let query = `INSERT INTO ${table}`;
     query += " (";
-    query += cols;
+    query += cols.toString();
     query += ") ";
-    query += "VALUES (";
-    query += printQuestionMarks(vals.length);
-    query += ")";
+    query += "VALUES (??)";
 
     connection.query(query, vals, (err, result) => {
       if (err) throw err;

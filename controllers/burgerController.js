@@ -1,5 +1,4 @@
 const express = require("express");
-const { end } = require("../config/connection.js");
 const router = express.Router();
 const burger = require("../models/burger.js");
 
@@ -18,7 +17,7 @@ router.post("/api/burgers", (req, res) => {
 
 router.put("/api/burgers/:id", (req, res) => {
   const condition = `id = ${req.params.id}`;
-  burger.updateOne("devoured = false", condition, (result) => {
+  burger.updateOne("devoured = true", condition, (result) => {
     if (result.changedRows == 0) {
       return res.status(404).end();
     }

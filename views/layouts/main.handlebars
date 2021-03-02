@@ -46,20 +46,20 @@
         const newBurgerBtn = document.getElementById("create-burger")
 
         if (newBurgerBtn) {
-            newBurgerBtn.addEventListener("click", (event) => {
+            newBurgerBtn.addEventListener("submit", (event) => {
                 event.preventDefault();
 
                 const newBurger = {
                     name: document.getElementById("bur").value.trim(),
                 }
 
-                fetch(`api/burgers`, {
+                fetch("/api/burgers", {
                     method: "POST",
 
                     body: JSON.stringify(newBurger),
                 }).then(() => {
                     document.getElementById("bur").value = ""
-                    location.reload("/")
+                    location.reload()
                 })
             })
         }
