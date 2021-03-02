@@ -1,5 +1,5 @@
 const express = require("express");
-const exphbs = require("express.handlebars");
+const exphbs = require("express-handlebars");
 
 const PORT = process.env.PORT || 8080;
 
@@ -15,7 +15,7 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 // route handling
-const routes = require("./controllers.burgerController.js");
+const routes = require("./controllers/burgerController.js");
 app.use(routes);
 
 app.listen(PORT, () => console.log(`Server is listening on port: ${PORT}`));
