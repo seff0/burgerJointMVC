@@ -47,6 +47,7 @@
 
         if (newBurgerBtn) {
             newBurgerBtn.addEventListener("click", (event) => {
+                event.preventDefault();
 
                 const newBurger = {
                     name: document.getElementById("bur").value.trim(),
